@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace Lab5 {
   class Program {
-    static public string DictionaryPath = @"\dictionary.txt";
+    static public string DictionaryPath = $"{(Environment.CurrentDirectory).Replace(" ", "")}" + @"\dictionary.txt";
     static public List<string> DictionaryWordCorrect = new List<string>();
     static public Dictionary<string, string[]> Dictionary = new Dictionary<string, string[]>();
 
@@ -111,11 +111,11 @@ namespace Lab5 {
     }
 
     static void Main(string[] args) {
-      Console.WriteLine("Что нужно сделать?\n\t1. Исправить очепятки в директории\n\t" +
-        "2. Привести телефонные номера формата (012) 345-67-89 к +380 12 345 67 89");
-      int UserChoice = int.Parse(Console.ReadLine());
-
       while (true) {
+        Console.Write("Что нужно сделать?\n\t1. Исправить очепятки в директории\n\t" +
+          "2. Привести телефонные номера формата (012) 345-67-89 к +380 12 345 67 89\nВыберите нужный пункт: ");
+        int UserChoice = int.Parse(Console.ReadLine());
+
         switch (UserChoice) {
           case 1:
             ReadDictionary();
@@ -125,12 +125,16 @@ namespace Lab5 {
 
             CorrectingTyposInTheDirectory(DirectoryPath);
 
+            Console.WriteLine("Ошибки исправлены!\n");
+
             break;
           case 2:
             Console.Write("Введите путь к директории: ");
             DirectoryPath = Console.ReadLine();
 
             ReplacePhoneNumber(DirectoryPath);
+
+            Console.WriteLine("Номера изменены!");
 
             break;
           default:
@@ -139,40 +143,6 @@ namespace Lab5 {
             break;
         }
       }
-
-      //string strText = "Ваш телефон (012) 345-67-89, (312) 344-62-81";
-      //string strFind = @"\((\d{3})\)\s(\d{3}-\d{2}-\d{2})";
-      //Console.WriteLine(strText);
-      //Console.WriteLine();
-      //Regex Pattern = new Regex(strFind);
-      //MatchCollection Matches = Pattern.Matches(strText);
-
-      //string[] MatchesString = new string[Matches.Count];
-
-      //for (int MatchesStringIndex = 0; MatchesStringIndex < MatchesString.Length; ++MatchesStringIndex) {
-      //  MatchesString[MatchesStringIndex] = Matches[MatchesStringIndex].ToString();
-      //}
-
-      //foreach (var item in MatchesString) {
-      //  Console.WriteLine(item);
-      //}
-
-      //for (int MatchesStringIndex = 0; MatchesStringIndex  < MatchesString.Length; ++MatchesStringIndex) {
-      //  string Result = MatchesString[MatchesStringIndex];
-
-      //  Result = Result.Replace("-", " ");
-      //  Result = Result.Replace("(", "");
-      //  Result = Result.Replace(")", ""); // 012 345 67 89
-      //  Result = "+38" + Result.First() + " " + Result.Substring(1);
-
-      //  strText = strText.Replace(MatchesString[MatchesStringIndex], Result);
-      //}
-
-
-
-      //Console.WriteLine();
-      //Console.WriteLine(strText);
-      //Console.ReadKey();
     }
   }
 }
