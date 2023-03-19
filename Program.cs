@@ -1,4 +1,10 @@
-﻿using System;
+﻿/****************************
+ *  Автор: Вяткин Влаислав  *
+ * Тема: Строки и коллекции *
+ *    Дата: 19.03.2023      *
+ ****************************/
+
+using System;
 using System.IO;
 using System.Linq;
 using System.Collections.Generic;
